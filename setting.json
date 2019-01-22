@@ -1,0 +1,13 @@
+{
+  "ideMap": {
+    "webstorm": {
+      "path": "/Applications/WebStorm.app"
+    },
+    "vscode": {
+      "path": "Visual Studio Code.app"
+    }
+  },
+  "alias": {
+    "ww": "webstorm"
+  }
+}
