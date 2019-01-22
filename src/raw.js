@@ -13,6 +13,9 @@ const secondParams = arg[2];
 invoke();
 
 function invoke() {
+  if (mainCommand === 'default') {
+    setDefaultIde();
+  }
   if (!setting.ideMap[mainCommand]) {
     const filePath = mainCommand;
     // use default ide
@@ -29,9 +32,6 @@ function invoke() {
   if (mainCommand === 'alias') {
     alias();
     return;
-  }
-  if (mainCommand === 'default') {
-    setDefaultIde();
   }
   if (setting.ideMap[mainCommand] || setting.ideMap[setting.alias[mainCommand]]) {
     // 此处调用命令行
