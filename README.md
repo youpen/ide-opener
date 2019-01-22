@@ -23,3 +23,8 @@ set default ide
 op default webstorm
 op ./MyProject
 ```
+config a new ide
+op config <ide> <idePath>
+```
+op config vscode "Visual Studio Code.app"
+```
