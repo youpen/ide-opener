@@ -65,6 +65,7 @@ function alias() {
 }
 
 function setDefaultIde() {
+  console.log('bbb')
   const defaultIde = firstParams;
   if (!setting.ideMap[defaultIde]) {
     console.log(`you haven't config ${defaultIde}`);

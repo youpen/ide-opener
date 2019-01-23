@@ -1,48 +1,92 @@
-// #! /usr/bin/env node
-//
-//
-// // 描述点1 shebang
-// // package.json bin
-// // npm link的原理，与project中bin的关系
-// // commander 功能
-// // auto link自动匹配ide
-// console.log(process.argv)
-// const program = require('commander');
-//
-// program
-//   .command('config')
-//   // .alias('-c')
-//   .description('config an application')
-//   .option('-p, --path <AppPath>', 'path');
-//
-//   // console.log(program)
-//
-// program.parse(process.argv);
-//
-// /*
-// * op link // find all ide application and auto config
-// *
-// * op config webstorm // config webstorm
-// * op config webstorm -path [PATH]
-// * // /Applications/WebStorm.app
-// * // Visual\ Studio\ Code.app
-// * op alias oldName newName //
-// * */
+#! /usr/bin/env node
 
+const fs = require('fs');
+const child_process = require('child_process');
+const path = require('path');
+const program = require('commander');
 
+const setting = require('./setting.json');
 
-
-
-var program = require('commander')
 program
   .version('0.0.1')
-  .option('-p, --peppers', 'Add peppers')
-  .option('-P, --pineapple', 'Add pineapple')
-  .option('-b, --bbq-sauce', 'Add bbq sauce')
-  .option('-c, --cheese [type]', 'Add the specified type of cheese [marble]', 'marble')
-  .parse(process.argv)
-console.log('you ordered a pizza with:')
-if (program.p) console.log('  - peppers')
-if (program.pineapple) console.log('  - pineapple')
-if (program.bbqSauce) console.log('  - bbq')
-console.log('  - %s cheese', program.cheese)
+
+program
+  .command('default <ideName>')
+  .description('Set default ide')
+  .action(setDefaultIde);
+
+program
+  .command('config <idePath> <ideName>')
+  .description('Config a new ide shortcut')
+  .action(config);
+
+program
+  .command('alias <ideName> <ideAlias>')
+  .description('Set alias for ide')
+  .action(alias);
+
+program
+  .command('show')
+  .description('Show configuration')
+  .action(showConfig);
+
+program
+  .command('*')
+  .action(open);
+
+function config() {
+  console.log('TODO');
+  // TODO
+}
+
+function alias(ideName, ideAlias) {
+  if (!setting.ideMap[ideName]) {
+    console.log(`you haven't config ${ideName}`);
+    return;
+  }
+  setting.alias[ideAlias] = ideName;
+  saveData();
+  console.log(`set ${ideName} alias: ${ideAlias}`);
+}
+
+function setDefaultIde(defaultIdeName) {
+  if (!setting.ideMap[defaultIdeName]) {
+    console.log(`you haven't config ${defaultIdeName}`);
+    return;
+  }
+  setting.default = defaultIdeName;
+  saveData();
+  console.log(`set default ide: ${defaultIdeName}`);
+}
+
+function saveData() {
+  const settingPath = path.resolve(__dirname, './setting.json');
+  fs.writeFileSync(settingPath, JSON.stringify(setting, null, 2));
+}
+
+function open(ideName, projectPath) {
+  debugger;
+  let idePath;
+  // use default ide
+  if (typeof projectPath !== 'string') {
+    projectPath = ideName;
+    idePath = setting.ideMap[setting.default].path;
+  } else {
+    // use specific ide or alias
+    const ideFullName = setting.alias[ideName] || ideName;
+    if (!ideFullName) {
+      console.log(`you haven't config ide or alias: ${ideName}`);
+      return;
+    }
+    idePath = setting.ideMap[ideFullName].path
+  }
+  child_process.exec(`open -a ${idePath} ${projectPath}`);
+}
+
+function showConfig() {
+  console.log(JSON.stringify(setting, null, 2))
+}
+
+
+// TODO vscode路径名称空格转义兼容
+program.parse(process.argv);

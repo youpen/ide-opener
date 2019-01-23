@@ -4,11 +4,13 @@
       "path": "/Applications/webstorm.app"
     },
     "vscode": {
-      "path": "Visual Studio Code.app"
+      "path": "Visual\\ Studio\\ Code.app"
     }
   },
   "alias": {
+    "vs": "vscode",
+    "ws": "webstorm",
     "ww": "webstorm"
   },
-  "default": "webstorm"
+  "default": "vscode"
 }
