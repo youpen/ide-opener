@@ -1,30 +1,34 @@
 # ide-opener
 
-#### Mac下快速启动ide的命令行工具
+#### Mac下快速用ide启动项目的命令行工具
 
 #####Install
-```
-// TODO
+```base
+npm install -g ide-opener
 ```
 
 #####Usage
 ---
-start a project or file
-```
-op webstorm ./MyProjects 
-```
-set alias for ide
-```
-op alias webstorm ws
-op ww ./MyProjects
-```
-set default ide
+##### set default ide
 ```
 op default webstorm
 op ./MyProject
 ```
-config a new ide
+##### start a project or file
+```
+op webstorm ./MyProjects 
+```
+##### set alias for ide
+```
+op alias webstorm ws
+op ww ./MyProjects
+```
+##### config a new ide
 op config <ide> <idePath>
 ```
-op config vscode "Visual Studio Code.app"
+op config webstorm /Applications/WebStorm.app
+```
+##### show config
+```bash
+op show
 ```
