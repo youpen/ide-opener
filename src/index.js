@@ -65,7 +65,6 @@ function saveData() {
 }
 
 function open(ideName, projectPath) {
-  debugger;
   let idePath;
   // use default ide
   if (typeof projectPath !== 'string') {
