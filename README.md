@@ -2,12 +2,14 @@
 
 #### Mac下快速用ide启动项目的命令行工具
 
-#####Install
+![image](https://github.com/youpen/ide-opener/blob/master/ide-opener.gif)
+
+##### Install
 ```base
 npm install -g ide-opener
 ```
 
-#####Usage
+##### Usage
 ---
 ##### set default ide
 ```
