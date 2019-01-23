@@ -8,7 +8,7 @@ const program = require('commander');
 const setting = require('./setting.json');
 
 program
-  .version('0.0.1')
+  .version('0.0.1');
 
 program
   .command('default <ideName>')
@@ -16,7 +16,7 @@ program
   .action(setDefaultIde);
 
 program
-  .command('config <idePath> <ideName>')
+  .command('config <ideName> <idePath>')
   .description('Config a new ide shortcut')
   .action(config);
 
@@ -34,9 +34,9 @@ program
   .command('*')
   .action(open);
 
-function config() {
-  console.log('TODO');
-  // TODO
+function config(ideName, idePath) {
+  setting.ideMap[ideName] = { path: idePath };
+  saveData();
 }
 
 function alias(ideName, ideAlias) {
@@ -80,7 +80,11 @@ function open(ideName, projectPath) {
     }
     idePath = setting.ideMap[ideFullName].path
   }
-  child_process.exec(`open -a ${idePath} ${projectPath}`);
+  child_process.exec(`open -a ${idePath} ${projectPath}`, (err, stdout, stderr) => {
+    if (err) {
+      console.log(stderr)
+    }
+  });
 }
 
 function showConfig() {
