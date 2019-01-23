@@ -7,10 +7,6 @@
       "path": "Visual\\ Studio\\ Code.app"
     }
   },
-  "alias": {
-    "vs": "vscode",
-    "ws": "webstorm",
-    "ww": "webstorm"
-  },
+  "alias": {},
   "default": "vscode"
 }
