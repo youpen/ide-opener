@@ -1,12 +1,18 @@
 {
   "ideMap": {
     "vscode": {
-      "path": "Visual\\ Studio\\ Code.app"
+      "path": "/Applications/Visual\\ Studio\\ Code.app"
     },
     "webstorm": {
       "path": "/Applications/WebStorm.app"
+    },
+    "pycharm": {
+      "path": "/Applications/PyCharm\\ CE.app"
     }
   },
-  "alias": {},
+  "alias": {
+    "py": "pycharm",
+    "vs": "vscode"
+  },
   "default": "webstorm"
 }
